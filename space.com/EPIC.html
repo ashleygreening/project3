@@ -1,13 +1,39 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <h1>EPIC: Earth Polychromatic Imaging Camera</h1>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    </head>
-<!--https://api.nasa.gov/EPIC/api/natural/date/2019-05-30?api_key=xTbGBXasS7UIDyrcua4If6o4HSKm2jgXzcagpz0H-->
+<head>
+    <title>EPIC</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+</head>
 
+<body class="container mt-4">
+    <h1>EPIC: Earth Polychromatic Imaging Camera</h1>
 
+    <div id="output"></div>
 
+    <script>
+        function getData() {
+            fetch('https://api.nasa.gov/EPIC/api/natural/date/2019-05-30?api_key=xTbGBXasS7UIDyrcua4If6o4HSKm2jgXzcagpz0H')
+                .then((response) => response.json())
+                .then((json) => {
+                    console.log(json);
 
+                    const first = json[0];                   
+                    const imageUrl = "https://epic.gsfc.nasa.gov/archive/natural/" + date + "/png/" + first.image + ".png";
 
-    
+                    document.getElementById("output").innerHTML = `
+                        <div class="card p-3">
+                            <p>Caption: ${first.caption}</p>
+                            <p>Date: ${first.date}</p>
+                            <img src="${imageUrl}" class="img-fluid mt-2">
+                        </div>
+                    `;
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+
+        getData();
+    </script>
+</body>
 </html>
