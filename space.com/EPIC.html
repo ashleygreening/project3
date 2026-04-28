@@ -17,7 +17,12 @@
                 .then((json) => {
                     console.log(json);
 
-                    const first = json[0];                   
+                    const first = json[0];
+
+                    //converting the date to YYYY/MM/DD format
+                    const date = first.date.split(" ")[0].replace(/-/g, "/");
+
+                    
                     const imageUrl = "https://epic.gsfc.nasa.gov/archive/natural/" + date + "/png/" + first.image + ".png";
 
                     document.getElementById("output").innerHTML = `
