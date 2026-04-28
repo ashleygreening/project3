@@ -1,18 +1,64 @@
 <html>
     <head>
-        <h1>Insight: Mars Weather</h1>
+        <h1>EONET</h1>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <!--https://api.nasa.gov/insight_weather/?api_key=xTbGBXasS7UIDyrcua4If6o4HSKm2jgXzcagpz0H&feedtype=json&ver=1.0
 -->
-   <h1>Mars Weather</h1>
-   <p>Trying to test this thing</p>
+  
+
+<body class="container mt-4">
+    <h1>Earth's Observatory Natural Events Tracker</h1>
+
+    <div id="output"></div>
+
+    <script>
+        function getWeatherData() {
+           fetch('https://eonet.gsfc.nasa.gov/api/v2.1/events')
+                  .then((response) => response.json())
+                .then((json) => {
+                    console.log(json)
+                    const event1=json.events[0];
+                    const event2=json.events[5];
+                    const event3=json.events[12];
+                    
+
+                    
+
+                    document.getElementById("output").innerHTML = `
+                        <div class="card p-3">
+                            <p>Event: ${event1.title}</p>
+                            <p>Learn More: ${event1.link}</p>
+
+                        </div>
+                        <div class="card p-3">
+                            <p>Event: ${event2.title}</p>
+                            <p>Learn More: ${event2.link}</p>
+                        </div>
+                        <div class="card p-3">
+                            <p>Event: ${event3.title}</p>
+                            <p>Learn More: ${event3.link}</p>
+                        </div>
+                    `;
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+                var data = JSON.parse(this.response);
+                
+        }
 
 
 
+                   
 
-
-
-
-
+    getWeatherData();
+    </script>
+</body>
 </html>
+
+
+
+
+
+
