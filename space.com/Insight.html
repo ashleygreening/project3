@@ -47,7 +47,7 @@ https://api.nasa.gov/planetary/apod?api_key=xTbGBXasS7UIDyrcua4If6o4HSKm2jgXzcag
     <div id="output"></div>
 
     <script>
-        function getWeatherData() {
+        function getEventData() {
            fetch('https://eonet.gsfc.nasa.gov/api/v2.1/events')
                   .then((response) => response.json())
                 .then((json) => {
@@ -58,27 +58,45 @@ https://api.nasa.gov/planetary/apod?api_key=xTbGBXasS7UIDyrcua4If6o4HSKm2jgXzcag
                     const event1=json.events[eventIndex];
                     const event2=json.events[event2Index];
                     const event3=json.events[event3Index];
+                    const source1Url = event1.sources[0].url;
+                    const source2Url = event2.sources[0].url;
+                    const source3Url = event3.sources[0].url;
+                    
+                    
 
                     document.getElementById("output").innerHTML = `
                         <div class="card p-3">
                             <p>Event: ${event1.title}</p>
-                            <p>Learn More: ${event1.link}</p>
+                            <p>
+                            Learn More: <a href="${source1Url}" target="_blank">
+                                Click Here
+                            </a>
+                        </p>
 
                         </div>
                         <div class="card p-3">
                             <p>Event: ${event2.title}</p>
-                            <p>Learn More: ${event2.link}</p>
+                            <p>
+                            Learn More: <a href="${source2Url}" target="_blank">
+                                Click Here
+                            </a>
+                        </p>
+                            
                         </div>
                         <div class="card p-3">
                             <p>Event: ${event3.title}</p>
-                            <p>Learn More: ${event3.link}</p>
+                            <p>
+                            Learn More: <a href="${source3Url}" target="_blank">
+                                Click Here
+                            </a>
+                        </p>
                         </div>
                     `;
                 })
                 .catch((error) => {
                     console.error(error);
                 });
-                var data = JSON.parse(this.response);
+                
                 
         }
 
@@ -86,7 +104,7 @@ https://api.nasa.gov/planetary/apod?api_key=xTbGBXasS7UIDyrcua4If6o4HSKm2jgXzcag
 
                    
 
-    getWeatherData();
+    getEventData();
     </script>
 </body>
 </html>
