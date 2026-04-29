@@ -53,9 +53,11 @@ https://api.nasa.gov/planetary/apod?api_key=xTbGBXasS7UIDyrcua4If6o4HSKm2jgXzcag
                 .then((json) => {
                     console.log(json)
                     eventIndex = Math.floor(Math.random() * 15);
+                    event2Index=Math.floor(Math.random() * 15);
+                    event3Index=Math.floor(Math.random() * 15);
                     const event1=json.events[eventIndex];
-                    const event2=json.events[5];
-                    const event3=json.events[12];
+                    const event2=json.events[event2Index];
+                    const event3=json.events[event3Index];
 
                     document.getElementById("output").innerHTML = `
                         <div class="card p-3">
