@@ -45,33 +45,41 @@ https://api.nasa.gov/planetary/apod?api_key=xTbGBXasS7UIDyrcua4If6o4HSKm2jgXzcag
         </header>
 
     <div id="output"></div>
-    <script>
+   <script>
         function getData() {
-    fetch('https://api.nasa.gov/planetary/apod?api_key=xTbGBXasS7UIDyrcua4If6o4HSKm2jgXzcagpz0H')
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-            const date = data.date;
+            fetch('https://api.nasa.gov/planetary/apod?api_key=xTbGBXasS7UIDyrcua4If6o4HSKm2jgXzcagpz0H')
+             .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
 
-            const imageUrl = data.hdurl;
+                 let mediaElement = "";
 
-            document.getElementById("output").innerHTML = `
-                <div class="card p-3">
-                    <h3>${data.title}</h3>
-                    <p>Date: ${data.date}</p>
-                    <p>${data.explanation}</p>
-                    <img src="${imageUrl}" class="img-fluid mt-2"}>
-                </div>
-            `;
-        })
-        .catch((error) => {
-            console.error("Error fetching APOD data:", error);
-        });
-        }
+                 if (data.media_type === "image") {
+                        mediaElement = `<img src="${data.url}" class="img-fluid mt-2">`;
+                 } 
+                    else if (data.media_type === "video") {
+                     mediaElement = `
+                         <video controls class="img-fluid mt-2">
+                                <source src="${data.url}" type="video/mp4">
+                            </video>
+                     `;
+                 }
 
+                    document.getElementById("output").innerHTML = `
+                         <div class="card p-3">
+                         <h3>${data.title}</h3>
+                        <p>Date: ${data.date}</p>
+                        <p>${data.explanation}</p>
+                         ${mediaElement}
+                     </div>
+                   `;
+              })
+                .catch((error) => {
+                 console.error(error);
+             });
+            }
 
-        getData();
-    </script>
-
+            getData();
+        </script>
     </body>
 </html>
