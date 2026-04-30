@@ -43,8 +43,11 @@ https://api.nasa.gov/planetary/apod?api_key=xTbGBXasS7UIDyrcua4If6o4HSKm2jgXzcag
                 </div>
             </div>
         </header>
+    
+    <section id="scroll">
 
-    <div id="output"></div>
+                <div id="output"></div>
+    </section>
 
     <script>
         function getEventData() {
@@ -61,51 +64,46 @@ https://api.nasa.gov/planetary/apod?api_key=xTbGBXasS7UIDyrcua4If6o4HSKm2jgXzcag
                     const source1Url = event1.sources[0].url;
                     const source2Url = event2.sources[0].url;
                     const source3Url = event3.sources[0].url;
-                    
-                    
 
                     document.getElementById("output").innerHTML = `
-                        <div class="card p-3">
-                            <p>Event: ${event1.title}</p>
-                            <p>
-                            Learn More: <a href="${source1Url}" target="_blank">
-                                Click Here
-                            </a>
-                        </p>
+                    
+                    
+                    <div class="container-fluid">
+                    <div class="row gx-5 align-items-center">
+                        <section id="scroll">
+                        <div class="col-lg-6 mb-5 mt-5">
+                            <h2>${event1.title}</h2>
+                            <a class="btn btn-secondary btn-xl rounded-pill" href="${source1Url}">Learn More</a>
+                        </div>
+                        </section>
+                        
+                        <section>
+                        <div class="mt-5 mb-5 col-lg-6">
+                            <h2>${event2.title}</h2>
+                            <a class="btn btn-secondary btn-xl rounded-pill" href="${source2Url}">Learn More</a>
+                        </div>
+                        </section>
+                        
+                        <section>
+                        <div class="col-lg-6 mb-5 mt-5">
+                            <h2>${event3.title}</h2>
+                            <a class="btn btn-secondary btn-xl rounded-pill" href="${source3Url}">Learn More</a>
+                        </div>
+                        </section>
 
-                        </div>
-                        <div class="card p-3">
-                            <p>Event: ${event2.title}</p>
-                            <p>
-                            Learn More: <a href="${source2Url}" target="_blank">
-                                Click Here
-                            </a>
-                        </p>
-                            
-                        </div>
-                        <div class="card p-3">
-                            <p>Event: ${event3.title}</p>
-                            <p>
-                            Learn More: <a href="${source3Url}" target="_blank">
-                                Click Here
-                            </a>
-                        </p>
-                        </div>
+                    </div>
+                    </div>
+                    </section>
                     `;
                 })
                 .catch((error) => {
                     console.error(error);
                 });
-                
-                
         }
-
-
-
-                   
-
+   
     getEventData();
     </script>
+
 </body>
 </html>
 
